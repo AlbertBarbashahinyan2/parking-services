@@ -6,6 +6,8 @@ import org.example.parkingservices.service.dto.BookingRequestDto;
 import org.example.parkingservices.service.dto.BookingResponseDto;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/bookings")
 @RequiredArgsConstructor
@@ -15,5 +17,10 @@ public class BookingController {
     @PostMapping
     public BookingResponseDto createBooking(@RequestBody BookingRequestDto bookingRequestDto) {
         return bookingService.createBooking(bookingRequestDto);
+    }
+
+    @GetMapping("community/{communityId}")
+    public List<BookingResponseDto> getBookingsForCommunity(@PathVariable Long communityId) {
+        return bookingService.getBookingsForCommunity(communityId);
     }
 }

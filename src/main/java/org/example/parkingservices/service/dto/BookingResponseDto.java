@@ -14,6 +14,9 @@ public class BookingResponseDto {
     @NotBlank(message = "Spot ID is mandatory")
     private Long spotId;
 
+    @NotBlank(message = "Spot number is mandatory")
+    private String spotNumber;
+
     @NotNull(message = "Start time is mandatory")
     private LocalDateTime startTime;
 

@@ -32,6 +32,12 @@ public class BookingService {
         return bookingMapper.toDto(booking);
     }
 
+    public List<BookingResponseDto> getBookingsForCommunity(Long communityId){
+        List<Booking> bookings = bookingRepository.findByCommunityId(communityId);
+        return bookingMapper.toDtos(bookings);
+    }
+
+
 
     private boolean hasOverlap(Booking newBooking, List<Booking> existingBookings) {
         return existingBookings.stream().anyMatch(existing ->

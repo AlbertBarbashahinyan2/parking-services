@@ -1,7 +1,6 @@
 package org.example.parkingservices.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.parkingservices.persistence.entity.Community;
 import org.example.parkingservices.persistence.repository.CommunityRepository;
 import org.example.parkingservices.service.dto.CommunityDto;
 import org.example.parkingservices.service.mapper.CommunityMapper;

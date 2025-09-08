@@ -8,6 +8,8 @@ import org.example.parkingservices.service.dto.BookingRequestDto;
 import org.example.parkingservices.service.dto.BookingResponseDto;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class BookingMapper {
@@ -34,9 +36,14 @@ public class BookingMapper {
         BookingResponseDto dto = new BookingResponseDto();
         dto.setUserId(booking.getUser().getId());
         dto.setSpotId(booking.getSpot().getId());
+        dto.setSpotNumber(booking.getSpot().getSpotNumber());
         dto.setStartTime(booking.getStartTime());
         dto.setEndTime(booking.getEndTime());
         dto.setStatus(booking.getStatus());
         return dto;
+    }
+
+    public List<BookingResponseDto> toDtos(List<Booking> bookings) {
+        return bookings.stream().map(this::toDto).toList();
     }
 }
