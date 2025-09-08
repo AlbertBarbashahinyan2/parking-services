@@ -1,5 +1,6 @@
 package org.example.parkingservices.service;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.example.parkingservices.persistence.entity.Booking;
 import org.example.parkingservices.persistence.repository.BookingRepository;
@@ -44,5 +45,9 @@ public class BookingService {
                 newBooking.getStartTime().isBefore(existing.getEndTime()) &&
                         newBooking.getEndTime().isAfter(existing.getStartTime())
         );
+    }
+
+    public Booking getBookingById(long bookingId) {
+        return bookingRepository.findById(bookingId).orElse(null);
     }
 }
