@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/spots")
 @RequiredArgsConstructor
@@ -17,5 +19,10 @@ public class SpotController {
     @GetMapping("/{id}")
     public SpotDto getSpotById(@PathVariable Long id) {
         return spotService.getSpotDtoById(id);
+    }
+
+    @GetMapping("/community/{communityId}")
+    public List<SpotDto> getSpotsByCommunityId(@PathVariable Long communityId) {
+        return spotService.getSpotsByCommunityId(communityId);
     }
 }

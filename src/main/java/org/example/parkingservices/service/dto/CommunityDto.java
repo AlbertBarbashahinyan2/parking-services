@@ -17,5 +17,4 @@ public class CommunityDto {
 
     private int totalSpots;
 
-    private List<SpotDto> spots;
 }

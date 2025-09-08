@@ -7,6 +7,8 @@ import org.example.parkingservices.service.dto.SpotDto;
 import org.example.parkingservices.service.mapper.SpotMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SpotService {
@@ -19,5 +21,10 @@ public class SpotService {
 
     public Spot getSpotById(Long id) {
         return spotRepository.findById(id).orElse(null);
+    }
+
+    public List<SpotDto> getSpotsByCommunityId(Long communityId) {
+        List<Spot> spots = spotRepository.findByCommunityId(communityId);
+        return spotMapper.toDtos(spots);
     }
 }

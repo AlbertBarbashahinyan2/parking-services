@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface SpotRepository extends JpaRepository<Spot, Long> {
 
@@ -21,4 +22,5 @@ public interface SpotRepository extends JpaRepository<Spot, Long> {
     void updateSpotStatuses();
 
 
+    List<Spot> findByCommunityId(Long communityId);
 }
