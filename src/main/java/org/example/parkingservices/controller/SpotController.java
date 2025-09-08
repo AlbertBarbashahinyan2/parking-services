@@ -1,14 +1,12 @@
 package org.example.parkingservices.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.parkingservices.persistence.entity.Community;
-import org.example.parkingservices.persistence.entity.Spot;
 import org.example.parkingservices.service.SpotService;
+import org.example.parkingservices.service.dto.SpotDto;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/spots")
@@ -16,8 +14,8 @@ import java.util.List;
 public class SpotController {
     private final SpotService spotService;
 
-//    @GetMapping("/available")
-//    public List<Spot> getAvailableSpots(Community community) {
-//        return spotService.getAvailableSpots(community);
-//    }
+    @GetMapping("/{id}")
+    public SpotDto getSpotById(@PathVariable Long id) {
+        return spotService.getSpotDtoById(id);
+    }
 }

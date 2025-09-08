@@ -1,19 +1,23 @@
 package org.example.parkingservices.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.parkingservices.persistence.entity.Community;
 import org.example.parkingservices.persistence.entity.Spot;
 import org.example.parkingservices.persistence.repository.SpotRepository;
+import org.example.parkingservices.service.dto.SpotDto;
+import org.example.parkingservices.service.mapper.SpotMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class SpotService {
     private final SpotRepository spotRepository;
+    private final SpotMapper spotMapper;
 
-//    public List<Spot> getAvailableSpots(Community community) {
-//        return spotRepository.findByCommunityAndIsAvailable(community, true);
-//    }
+    public SpotDto getSpotDtoById(Long id) {
+        return spotMapper.toDto(spotRepository.findById(id).orElse(null));
+    }
+
+    public Spot getSpotById(Long id) {
+        return spotRepository.findById(id).orElse(null);
+    }
 }

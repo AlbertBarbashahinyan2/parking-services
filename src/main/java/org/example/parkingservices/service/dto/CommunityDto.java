@@ -15,5 +15,7 @@ public class CommunityDto {
     @NotBlank(message = "Address is mandatory")
     private String address;
 
+    private int totalSpots;
+
     private List<SpotDto> spots;
 }

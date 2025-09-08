@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -15,10 +17,13 @@ public class Booking {
     private Long id;
 
     @Column(name = "start_time", nullable = false)
-    private String startTime;
+    private LocalDateTime startTime;
 
     @Column(name = "end_time", nullable = false)
-    private String endTime;
+    private LocalDateTime endTime;
+
+    @Column(name = "status", nullable = false)
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "spot_id", nullable = false)

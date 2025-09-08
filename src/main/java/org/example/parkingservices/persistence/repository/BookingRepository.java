@@ -2,7 +2,24 @@ package org.example.parkingservices.persistence.repository;
 
 import org.example.parkingservices.persistence.entity.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
+    List<Booking> findBySpotId(Long spotId);
+
+    Optional<Booking> findBySpotIdOrderByStartTimeAsc(Long spotId);
+
+    @Modifying
+    @Query("UPDATE Booking b SET b.status = 'EXPIRED' WHERE b.endTime < :now AND b.status <> 'EXPIRED'")
+    void updateExpiredBookings(LocalDateTime now);
+
+    @Modifying
+    @Query("UPDATE Booking b SET b.status = 'IN_PROGRESS' WHERE b.startTime < :now AND b.status <> 'IN_PROGRESS' AND b.status <> 'EXPIRED'")
+    void updateInProgressBookings(LocalDateTime now);
 }

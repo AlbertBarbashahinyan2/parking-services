@@ -19,6 +19,7 @@ public class CommunityMapper {
         communityDto.setName(community.getName());
         communityDto.setAddress(community.getAddress());
         communityDto.setSpots(spotMapper.toDtos(community.getSpots()));
+        communityDto.setTotalSpots(community.getSpots().size());
         return communityDto;
     }
 }
