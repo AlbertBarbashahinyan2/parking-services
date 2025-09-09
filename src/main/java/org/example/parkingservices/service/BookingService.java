@@ -1,6 +1,5 @@
 package org.example.parkingservices.service;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.example.parkingservices.persistence.entity.Booking;
 import org.example.parkingservices.persistence.repository.BookingRepository;
@@ -47,7 +46,7 @@ public class BookingService {
         );
     }
 
-    public Booking getBookingById(long bookingId) {
-        return bookingRepository.findById(bookingId).orElse(null);
+    public BookingResponseDto getBookingById(long bookingId) {
+        return bookingMapper.toDto(bookingRepository.findById(bookingId).orElse(null));
     }
 }

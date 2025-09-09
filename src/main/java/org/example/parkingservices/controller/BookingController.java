@@ -19,6 +19,11 @@ public class BookingController {
         return bookingService.createBooking(bookingRequestDto);
     }
 
+    @GetMapping("/{id}")
+    public BookingResponseDto getBookingById(@PathVariable Long id) {
+        return bookingService.getBookingById(id);
+    }
+
     @GetMapping("community/{communityId}")
     public List<BookingResponseDto> getBookingsForCommunity(@PathVariable Long communityId) {
         return bookingService.getBookingsForCommunity(communityId);

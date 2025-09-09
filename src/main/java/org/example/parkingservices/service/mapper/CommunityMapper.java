@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class CommunityMapper {
-    private final SpotMapper spotMapper;
 
     public CommunityDto toDto(Community community) {
         if (community == null) {
@@ -18,8 +17,10 @@ public class CommunityMapper {
         communityDto.setId(community.getId());
         communityDto.setName(community.getName());
         communityDto.setAddress(community.getAddress());
-//        communityDto.setSpots(spotMapper.toDtos(community.getSpots()));
         communityDto.setTotalSpots(community.getSpots().size());
+        communityDto.setAvailableSpots((int) community.getSpots().stream()
+                .filter(spot -> "AVAILABLE".equals(spot.getStatus()))
+                .count());
         return communityDto;
     }
 }

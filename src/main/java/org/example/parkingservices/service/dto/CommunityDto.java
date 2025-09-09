@@ -17,4 +17,6 @@ public class CommunityDto {
 
     private int totalSpots;
 
+    private int availableSpots;
+
 }

@@ -7,13 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     List<Booking> findBySpotId(Long spotId);
-
-    Optional<Booking> findBySpotIdOrderByStartTimeAsc(Long spotId);
 
     @Modifying
     @Query("UPDATE Booking b SET b.status = 'EXPIRED' WHERE b.endTime < :now AND b.status <> 'EXPIRED'")

@@ -10,7 +10,6 @@ import org.example.parkingservices.service.dto.SpotDto;
 import org.example.parkingservices.service.mapper.SpotMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,7 +28,7 @@ public class SpotService {
     }
 
     public List<SpotDto> getSpotsByCommunityId(Long communityId) {
-        List<Spot> spots = spotRepository.findByCommunityId(communityId);
+        List<Spot> spots = spotRepository.findByCommunityIdOrderById(communityId);
         return spotMapper.toDtos(spots);
     }
 
