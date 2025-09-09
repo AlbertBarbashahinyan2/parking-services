@@ -1,6 +1,7 @@
 package org.example.parkingservices.service.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -8,10 +9,13 @@ import java.time.LocalDateTime;
 
 @Data
 public class BookingResponseDto {
-    @NotBlank(message = "User ID is mandatory")
+    @NotNull(message = "Booking ID is mandatory")
+    private Long id;
+
+    @NotNull(message = "User ID is mandatory")
     private Long userId;
 
-    @NotBlank(message = "Spot ID is mandatory")
+    @NotNull(message = "Spot ID is mandatory")
     private Long spotId;
 
     @NotBlank(message = "Spot number is mandatory")

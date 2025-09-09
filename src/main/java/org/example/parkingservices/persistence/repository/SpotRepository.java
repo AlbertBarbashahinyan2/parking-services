@@ -17,7 +17,8 @@ public interface SpotRepository extends JpaRepository<Spot, Long> {
             "        WHERE b.spot.id = s.id AND b.status = 'IN_PROGRESS'" +
             "    ) THEN 'BOOKED' " +
             "    ELSE 'AVAILABLE' " +
-            "END")
+            "END " +
+            "WHERE s.status <> 'OCCUPIED'")
     void updateSpotStatuses();
 
     List<Spot> findByCommunityIdOrderById(Long communityId);

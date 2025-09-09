@@ -30,4 +30,10 @@ public class SpotController {
                               @RequestBody @Valid ParkingRequestDto parkingRequestDto) {
         return spotService.parkInSpot(id, parkingRequestDto);
     }
+
+    @DeleteMapping("/{id}/release")
+    public SpotDto releaseSpot(@PathVariable Long id,
+                              @RequestBody @Valid ParkingRequestDto parkingRequestDto) {
+        return spotService.releaseSpot(id, parkingRequestDto);
+    }
 }

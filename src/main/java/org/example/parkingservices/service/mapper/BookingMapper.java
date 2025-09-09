@@ -34,6 +34,7 @@ public class BookingMapper {
             return null;
         }
         BookingResponseDto dto = new BookingResponseDto();
+        dto.setId(booking.getId());
         dto.setUserId(booking.getUser().getId());
         dto.setSpotId(booking.getSpot().getId());
         dto.setSpotNumber(booking.getSpot().getSpotNumber());

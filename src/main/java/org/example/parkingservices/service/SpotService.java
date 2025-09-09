@@ -1,5 +1,6 @@
 package org.example.parkingservices.service;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.parkingservices.exception.ResourceAlreadyUsedException;
 import org.example.parkingservices.exception.ResourceNotFoundException;
@@ -57,6 +58,25 @@ public class SpotService {
             throw new IllegalArgumentException("Invalid booking for this spot.");
         }
         spot.setStatus("OCCUPIED");
+        spotRepository.save(spot);
+        return spotMapper.toDto(spot);
+    }
+
+    public SpotDto releaseSpot(Long spotId, @Valid ParkingRequestDto parkingRequestDto) {
+        Spot spot = getSpotById(spotId);
+        if (spot.getStatus().equals("AVAILABLE")) {
+            throw new ResourceAlreadyUsedException("Spot with id " + spotId + " is already available.");
+        }
+        Booking booking = bookingRepository.findById(parkingRequestDto.getBookingId()).orElseThrow(
+                () -> new ResourceNotFoundException("Booking not found with id: " +
+                        parkingRequestDto.getBookingId())
+        );
+        if (!booking.getSpot().getId().equals(spotId) ||
+                !booking.getUser().getId().equals(parkingRequestDto.getUserId()) ||
+                booking.getStatus().equals("PENDING")) {
+            throw new IllegalArgumentException("Invalid booking for this spot.");
+        }
+        spot.setStatus("AVAILABLE");
         spotRepository.save(spot);
         return spotMapper.toDto(spot);
     }
