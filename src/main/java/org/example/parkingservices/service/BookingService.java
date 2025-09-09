@@ -1,6 +1,8 @@
 package org.example.parkingservices.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.parkingservices.exception.ResourceNotFoundException;
+import org.example.parkingservices.exception.IllegalArgumentException;
 import org.example.parkingservices.persistence.entity.Booking;
 import org.example.parkingservices.persistence.repository.BookingRepository;
 import org.example.parkingservices.service.dto.BookingRequestDto;
@@ -34,6 +36,9 @@ public class BookingService {
 
     public List<BookingResponseDto> getBookingsForCommunity(Long communityId){
         List<Booking> bookings = bookingRepository.findByCommunityId(communityId);
+        if (bookings == null || bookings.isEmpty()) {
+            throw new ResourceNotFoundException("No community found with id " + communityId);
+        }
         return bookingMapper.toDtos(bookings);
     }
 
@@ -47,6 +52,8 @@ public class BookingService {
     }
 
     public BookingResponseDto getBookingById(long bookingId) {
-        return bookingMapper.toDto(bookingRepository.findById(bookingId).orElse(null));
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + bookingId));
+        return bookingMapper.toDto(booking);
     }
 }

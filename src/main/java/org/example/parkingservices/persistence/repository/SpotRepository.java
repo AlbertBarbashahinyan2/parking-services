@@ -20,6 +20,5 @@ public interface SpotRepository extends JpaRepository<Spot, Long> {
             "END")
     void updateSpotStatuses();
 
-
     List<Spot> findByCommunityIdOrderById(Long communityId);
 }
