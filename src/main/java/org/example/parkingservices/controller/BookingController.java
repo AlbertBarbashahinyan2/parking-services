@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.parkingservices.service.BookingService;
 import org.example.parkingservices.service.dto.BookingRequestDto;
 import org.example.parkingservices.service.dto.BookingResponseDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,11 @@ public class BookingController {
     @PostMapping
     public BookingResponseDto createBooking(@RequestBody BookingRequestDto bookingRequestDto) {
         return bookingService.createBooking(bookingRequestDto);
+    }
+
+    @DeleteMapping("/{bookingId}")
+    public void cancelBooking(@PathVariable Long bookingId) {
+        bookingService.cancelBooking(bookingId);
     }
 
     @GetMapping("/{id}")

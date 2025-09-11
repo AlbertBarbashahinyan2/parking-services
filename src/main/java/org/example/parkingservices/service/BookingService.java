@@ -56,4 +56,11 @@ public class BookingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + bookingId));
         return bookingMapper.toDto(booking);
     }
+
+    public void cancelBooking(Long bookingId) {
+        if (!bookingRepository.existsById(bookingId)) {
+            throw new ResourceNotFoundException("Booking not found with id: " + bookingId);
+        }
+        bookingRepository.deleteById(bookingId);
+    }
 }
